@@ -19,11 +19,12 @@ bgX2 = bg.get_width()
 clock = pygame.time.Clock()
 # used to change the FPS as we move
 
+
 class player(object):
     run = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in
-            range(8,16)]
+            range(8, 16)]
     jump = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in
-            range(1,8)]
+            range(1, 8)]
     slide = [pygame.image.load(os.path.join('images', 'S1.png')),pygame.image.load(
                 os.path.join('images', 'S2.png')), pygame.image.load(os.path.join(
                     'images', 'S2.png')), pygame.image.load(os.path.join(
