@@ -6,21 +6,40 @@ import math
 
 pygame.init()
 
-W, H = 800, 447  # width and height of the screen because background is 447
+W, H = 800, 447
+# width and height of the screen because background is 447
 win = pygame.display.set_mode((W, H))
 pygame.display.set_caption('Side Scroller')
 
-bg = pygame.image.load(os.path.join('images', 'bg.png')).convert()  # background image
+bg = pygame.image.load(os.path.join('images', 'bg.png')).convert()
+# background image
 bgX = 0
 bgX2 = bg.get_width()
 
-clock = pygame.time.Clock()  # used to change the FPS as we move
+clock = pygame.time.Clock()
+# used to change the FPS as we move
 
 class player(object):
-    run = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in range(8,16)]
-    jump = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in range(1,8)]
-    slide = [pygame.image.load(os.path.join('images', 'S1.png')),pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S3.png')), pygame.image.load(os.path.join('images', 'S4.png')), pygame.image.load(os.path.join('images', 'S5.png'))]
-    jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4]
+    run = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in
+            range(8,16)]
+    jump = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in
+            range(1,8)]
+    slide = [pygame.image.load(os.path.join('images', 'S1.png')),pygame.image.load(
+                os.path.join('images', 'S2.png')), pygame.image.load(os.path.join(
+                    'images', 'S2.png')), pygame.image.load(os.path.join(
+                    'images', 'S2.png')), pygame.image.load(os.path.join(
+                    'images', 'S2.png')), pygame.image.load(os.path.join(
+                    'images', 'S2.png')), pygame.image.load(os.path.join(
+                    'images', 'S2.png')), pygame.image.load(os.path.join(
+                    'images', 'S2.png')), pygame.image.load(os.path.join(
+                    'images', 'S3.png')), pygame.image.load(os.path.join(
+                    'images', 'S4.png')), pygame.image.load(os.path.join('images', 'S5.png'))]
+    jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3,
+                3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, -1, -1, -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+                -2, -2, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -4, -4, -4,
+                -4, -4, -4, -4, -4, -4, -4, -4, -4]
 
 
     def __init__(self, x, y, width, height):
@@ -36,7 +55,8 @@ class player(object):
         self.slideUp = False
 
 
-    def draw(self, win):  # animation for the character running, jumping, and sliding
+    def draw(self, win):
+        # animation for the character running, jumping, and sliding
         if self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.2
             win.blit(self.jump[self.jumpCount // 18], (self.x,self.y))
@@ -66,7 +86,9 @@ class player(object):
 
 
 class saw(object):
-    img = [pygame.image.load(os.path.join('images','SAW0.png')), pygame.image.load(os.path.join('images','SAW1.png')), pygame.image.load(os.path.join('images', 'SAW2.png')), pygame.image.load(os.path.join('images', 'SAW3.png'))]
+    img = [pygame.image.load(os.path.join('images','SAW0.png')), pygame.image.load(
+            os.path.join('images','SAW1.png')), pygame.image.load(os.path.join(
+            'images', 'SAW2.png')), pygame.image.load(os.path.join('images', 'SAW3.png'))]
     def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
@@ -85,7 +107,8 @@ class saw(object):
         pygame.draw.rect(win, (255,0,0), self.hitbox, 2)
 
 
-class spike(saw):  # using saw makes def __init__ reused
+class spike(saw):
+    # using saw makes def __init__ reused
     img = pygame.image.load(os.path.join('images', 'spike.png'))
     def draw(self, win):
         self.hitbox = (self.x + 10, self.y, 28, 315)
@@ -105,16 +128,22 @@ def redrawWindow():
 spikee = spike(300, 0, 48, 320)
 saww = saw(300, 300, 64, 64)
 runner = player(200, 313, 64, 64)
-pygame.time.set_timer(USEREVENT + 1, 500) # in milliseconds so every half second increase speed by calling this event
+pygame.time.set_timer(USEREVENT + 1, 500)
+# in milliseconds so every half second increase speed by calling this event
 speed = 30
 run = True
 while run:
     redrawWindow()
-    bgX -= 1.4  # larger number makes background go faster
-    bgX2 -= 1.4  # number must match number above
-    if bgX < bg.get_width() * -1:  # first background image starting at 0,0 starts moving until it gets to the Negative width of the background
-        bgX = bg.get_width()  # after width is at ie -900 then we can no longer see it so we reset the image
-    if bgX2 < bg.get_width() * -1:  # 2nd background object on the screen to give the appearance of continous run
+    bgX -= 1.4
+    # larger number makes background go faster
+    bgX2 -= 1.4
+    # number must match number above
+    if bgX < bg.get_width() * -1:
+        # first background image starting at 0,0 starts moving until it gets to the Negative width of the background
+        bgX = bg.get_width()
+        # after width is at ie -900 then we can no longer see it so we reset the image
+    if bgX2 < bg.get_width() * -1:
+        # 2nd background object on the screen to give the appearance of continous run
         bgX2 = bg.get_width()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -126,11 +155,13 @@ while run:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
-        if not(runner.jumping):  #stops runner from jumping while already jumping
+        if not(runner.jumping):
+            #stops runner from jumping while already jumping
             runner.jumping = True
 
     if keys[pygame.K_DOWN]:
-        if not(runner.sliding):  # if runner is sliding when we hit down arrow prevents from sliding again
+        if not(runner.sliding):
+            # if runner is sliding when we hit down arrow prevents from sliding again
             runner.sliding = True
 
     clock.tick(speed)
