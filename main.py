@@ -34,7 +34,8 @@ class player(object):
                     'images', 'S2.png')), pygame.image.load(os.path.join(
                     'images', 'S2.png')), pygame.image.load(os.path.join(
                     'images', 'S3.png')), pygame.image.load(os.path.join(
-                    'images', 'S4.png')), pygame.image.load(os.path.join('images', 'S5.png'))]
+                    'images', 'S4.png')), pygame.image.load(os.path.join(
+                    'images', 'S5.png'))]
     jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3,
                 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -98,19 +99,19 @@ class saw(object):
         self.hitbox = (x, y, width, height)
         self.count = 0
 
-
     def draw(self, win):
         self.hitbox = (self.x + 5, self.y + 5, self.width - 10, self.height)
         if self.count >= 8:
             self.count = 0
-        win.blit(pygame.transform.scale(self.img[self.count // 2], (64, 64)), (self.x,self.y))
+        win.blit(pygame.transform.scale(self.img[self.count // 2], (64, 64)), (self.x, self.y))
         self.count += 1
-        pygame.draw.rect(win, (255,0,0), self.hitbox, 2)
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
 
 class spike(saw):
     # using saw makes def __init__ reused
     img = pygame.image.load(os.path.join('images', 'spike.png'))
+
     def draw(self, win):
         self.hitbox = (self.x + 10, self.y, 28, 315)
         win.blit(self.img, (self.x, self.y))
@@ -140,29 +141,33 @@ while run:
     bgX2 -= 1.4
     # number must match number above
     if bgX < bg.get_width() * -1:
-        # first background image starting at 0,0 starts moving until it gets to the Negative width of the background
+        # first background image starting at 0,0 starts moving until it gets to
+        # the Negative width of the background
         bgX = bg.get_width()
-        # after width is at ie -900 then we can no longer see it so we reset the image
+        # after width is at ie -900 then we can no longer see it so we reset
+        # the image to see background as continous
     if bgX2 < bg.get_width() * -1:
-        # 2nd background object on the screen to give the appearance of continous run
+        # 2nd background object on the screen to give the appearance of
+        # continous running background
         bgX2 = bg.get_width()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
             pygame.quit()
             quit()
-        if event.type == USEREVENT+1:
+        if event.type == USEREVENT + 1:
             speed += 1
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
         if not(runner.jumping):
-            #stops runner from jumping while already jumping
+            # stops runner from jumping while already jumping
             runner.jumping = True
 
     if keys[pygame.K_DOWN]:
         if not(runner.sliding):
-            # if runner is sliding when we hit down arrow prevents from sliding again
+            # if runner is sliding when we hit down arrow again
+            # prevents from sliding again
             runner.sliding = True
 
     clock.tick(speed)
