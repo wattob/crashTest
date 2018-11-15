@@ -10,7 +10,7 @@ W, H = 800, 447 #width and height of the screen because background is 447
 win = pygame.display.set_mode((W,H))
 pygame.display.set_caption('Side Scroller')
 
-bg = pygame.image.load(os.path.join('images','bg.png')).convert() # background image
+bg = pygame.image.load(os.path.join('images', 'bg.png')).convert() # background image
 bgX = 0
 bgX2 = bg.get_width()
 
@@ -19,8 +19,8 @@ clock = pygame.time.Clock() # used to change the FPS as we move
 class player(object):
     run = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in range(8,16)]
     jump = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in range(1,8)]
-    slide = [pygame.image.load(os.path.join('images', 'S1.png')),pygame.image.load(os.path.join('images', 'S2.png')),pygame.image.load(os.path.join('images', 'S2.png')),pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')),pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S3.png')), pygame.image.load(os.path.join('images', 'S4.png')), pygame.image.load(os.path.join('images', 'S5.png'))]
-    jumpList = [1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,-1,-1,-1,-1,-1,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4]
+    slide = [pygame.image.load(os.path.join('images', 'S1.png')),pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')), pygame.image.load(os.path.join('images', 'S3.png')), pygame.image.load(os.path.join('images', 'S4.png')), pygame.image.load(os.path.join('images', 'S5.png'))]
+    jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4]
     def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
@@ -63,13 +63,13 @@ class player(object):
             self.runCount += 1
 
 class saw(object):
-    img = [pygame.image.load(os.path.join('images','SAW0.png')),pygame.image.load(os.path.join('images','SAW1.png')),pygame.image.load(os.path.join('images','SAW2.png')),pygame.image.load(os.path.join('images','SAW3.png'))]
+    img = [pygame.image.load(os.path.join('images','SAW0.png')), pygame.image.load(os.path.join('images','SAW1.png')), pygame.image.load(os.path.join('images', 'SAW2.png')), pygame.image.load(os.path.join('images', 'SAW3.png'))]
     def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
-        self.hitbox = (x,y,width,height)
+        self.hitbox = (x, y, width, height)
         self.count = 0
 
     def draw(self, win):
@@ -95,10 +95,10 @@ def redrawWindow():
     saww.draw(win)
     pygame.display.update()
 
-spikee = spike(300,0,48,320)
-saww = saw(300,300,64,64)
-runner = player(200,313,64,64)
-pygame.time.set_timer(USEREVENT+1,500) # in milliseconds so every half second increase speed by calling this event
+spikee = spike(300, 0, 48, 320)
+saww = saw(300, 300, 64, 64)
+runner = player(200, 313, 64, 64)
+pygame.time.set_timer(USEREVENT+1, 500) # in milliseconds so every half second increase speed by calling this event
 speed = 30
 run = True
 while run:
