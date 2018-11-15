@@ -27,20 +27,24 @@ class player(object):
             range(1, 8)]
     slide = [pygame.image.load(os.path.join('images', 'S1.png')),pygame.image.load(
                 os.path.join('images', 'S2.png')), pygame.image.load(os.path.join(
-                        'images', 'S2.png')), pygame.image.load(os.path.join('images',
-                        'S2.png')), pygame.image.load(os.path.join('images',
-                        'S2.png')), pygame.image.load(os.path.join('images',
-                        'S2.png')), pygame.image.load(os.path.join('images',
-                        'S2.png')), pygame.image.load(os.path.join('images',
-                        'S2.png')), pygame.image.load(os.path.join('images',
-                        'S3.png')), pygame.image.load(os.path.join('images',
-                        'S4.png')), pygame.image.load(os.path.join('images', 'S5.png'))]
-    jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3,
-                3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, -1, -1, -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
-                -2, -2, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -4, -4, -4,
-                -4, -4, -4, -4, -4, -4, -4, -4, -4]
+                        'images', 'S2.png')), pygame.image.load(os.path.join(
+                            'images', 'S2.png')), pygame.image.load(os.path.
+                            join('images', 'S2.png')), pygame.image.load(os.path
+                                .join('images', 'S2.png')), pygame.image.load(
+                                os.path.join('images', 'S2.png')), pygame.image
+                                    .load(os.path.join('images','S2.png')),
+                                        pygame.image.load(os.path.join('images',
+                                            'S3.png')), pygame.image.load(
+                                                os.path.join('images','S4.png')
+                                                    ), pygame.image.load(os.path.
+                                                        join('images', 'S5.png'))]
+    jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3,
+                    3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                    4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -2, -2, -2, -2,
+                    -2, -2, -2, -2, -2, -2, -2, -2, -3, -3, -3, -3, -3, -3, -3,
+                    -3, -3, -3, -3, -3, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4,
+                    -4, -4]
 
     def __init__(self, x, y, width, height):
         self.x = x
@@ -58,7 +62,7 @@ class player(object):
         # animation for the character running, jumping, and sliding
         if self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.2
-            win.blit(self.jump[self.jumpCount // 18], (self.x,self.y))
+            win.blit(self.jump[self.jumpCount // 18], (self.x, self.y))
             self.jumpCount += 1
             if self.jumpCount > 108:
                 self.jumpCount = 0
@@ -85,10 +89,10 @@ class player(object):
 
 
 class saw(object):
-    img = [pygame.image.load(os.path.join('images','SAW0.png')), pygame.image.load(
-            os.path.join('images', 'SAW1.png')), pygame.image.load(os.path.join(
-                'images', 'SAW2.png')), pygame.image.load(os.path.join('images',
-                    'SAW3.png'))]
+    img = [pygame.image.load(os.path.join('images', 'SAW0.png')), pygame.image.
+            load(os.path.join('images', 'SAW1.png')), pygame.image.load(os.path.
+                join('images', 'SAW2.png')), pygame.image.load(os.path.join(
+                    'images','SAW3.png'))]
 
     def __init__(self, x, y, width, height):
         self.x = x
@@ -103,7 +107,7 @@ class saw(object):
         if self.count >= 8:
             self.count = 0
         win.blit(pygame.transform.scale(self.img[self.count // 2], (64, 64)),
-            (self.x, self.y))
+                (self.x, self.y))
         self.count += 1
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
