@@ -35,6 +35,7 @@ class player(object):
                 pygame.image.load(os.path.join('images', 'S3.png')),
                 pygame.image.load(os.path.join('images', 'S4.png')),
                 pygame.image.load(os.path.join('images', 'S5.png'))]
+    fall = pygame.image.load(os.path.join('images', '0.png'))
     jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3,
                 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -122,13 +123,10 @@ def redrawWindow():
     win.blit(bg, (bgX, 0))
     win.blit(bg, (bgX2, 0))
     runner.draw(win)
-    spikee.draw(win)
-    saww.draw(win)
+
     pygame.display.update()
 
 
-spikee = spike(300, 0, 48, 320)
-saww = saw(300, 300, 64, 64)
 runner = player(200, 313, 64, 64)
 pygame.time.set_timer(USEREVENT + 1, 500)
 # in milliseconds so every half second increase speed by calling this event
