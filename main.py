@@ -27,14 +27,15 @@ class player(object):
             range(1, 8)]
     slide = [pygame.image.load(os.path.join('images', 'S1.png')), pygame.image.
              load(os.path.join('images', 'S2.png')), pygame.image.load(
-             os.path.join('images', 'S2.png')), pygame.image.load(os.path.
-                join('images', 'S2.png')), pygame.image.load(os.path.join(
-                'images', 'S2.png')), pygame.image.load(os.path.join('images',
-                'S2.png')), pygame.image.load(os.path.join('images', 'S2.png')
-                ),pygame.image.load(os.path.join('images', 'S2.png')),
-                pygame.image.load(os.path.join('images', 'S3.png')),
-                pygame.image.load(os.path.join('images', 'S4.png')),
-                pygame.image.load(os.path.join('images', 'S5.png'))]
+             os.path.join('images', 'S2.png')), pygame.image.load(
+             os.path.join('images', 'S2.png')), pygame.image.load(
+             os.path.join('images', 'S2.png')), pygame.image.load(
+             os.path.join('images', 'S2.png')), pygame.image.load(
+             os.path.join('images', 'S2.png')), pygame.image.load(
+             os.path.join('images', 'S2.png')), pygame.image.load(
+             os.path.join('images', 'S3.png')), pygame.image.load(
+             os.path.join('images', 'S4.png')), pygame.image.load(
+             os.path.join('images', 'S5.png'))]
     fall = pygame.image.load(os.path.join('images', '0.png'))
     jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3,
                 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
