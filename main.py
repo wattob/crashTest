@@ -88,9 +88,9 @@ class player(object):
 
 class saw(object):
     img = [pygame.image.load(os.path.join('images', 'SAW0.png')), pygame.image.
-           load(os.path.join('images', 'SAW1.png')), pygame.image.load
-            (os.path.join('images', 'SAW2.png')), pygame.image.load(os.path.
-                join('images', 'SAW3.png'))]
+           load(os.path.join('images', 'SAW1.png')), pygame.image.load(
+           os.path.join('images', 'SAW2.png')), pygame.image.load(
+           os.path.join('images', 'SAW3.png'))]
 
     def __init__(self, x, y, width, height):
         self.x = x
