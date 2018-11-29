@@ -66,25 +66,33 @@ class player(object):
                 self.jumpCount = 0
                 self.jumping = False
                 self.runCount = 0
+                # hitbox for character while jumping
+                self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
         elif self.sliding or self.slideUp:
             if self.slideCount < 20:
                 self.y += 1
             elif self.slideCount == 80:
                 self.y -= 19
                 self.sliding = False
+            elif self.slideCount > 20 and self.slideCount < 80:
+                self.hitbox = (self.x, self.y + 3, self.wdith - 8, self.height - 35)
                 self.slideUp = True
             if self.slideCount >= 110:
                 self.slideCount = 0
                 self.slideUp = False
                 self.runCount = 0
+                self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
             win.blit(self.slide[self.slideCount // 10], (self.x, self.y))
             self.slideCount += 1
+        elif self.falling:
+            win.blit(self.fall, (self.x, self.y + 30))
         else:
             if self.runCount > 42:
                 self.runCount = 0
             win.blit(self.run[self.runCount // 6], (self.x, self.y))
             self.runCount += 1
-
+            self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 13)
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
 class saw(object):
     img = [pygame.image.load(os.path.join('images', 'SAW0.png')), pygame.image.
