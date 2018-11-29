@@ -6,7 +6,7 @@ import math
 
 pygame.init()
 
-W, H = 800, 447
+W, H = 800, 750
 # width and height of the screen because background is 447
 win = pygame.display.set_mode((W, H))
 pygame.display.set_caption('Side Scroller')
@@ -128,7 +128,8 @@ def redrawWindow():
     pygame.display.update()
 
 
-runner = player(200, 313, 64, 64)
+runner = player(200, 470, 64, 64)
+# location of the character on the background
 pygame.time.set_timer(USEREVENT + 1, 500)
 # in milliseconds so every half second increase speed by calling this event
 speed = 30
