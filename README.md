@@ -19,5 +19,5 @@ Here is an example of the program in action:
 
 ## Source
 Source for crash test dummy character: https://opengameart.org/content/crash-test-dummy
-Author: SpriteAttack.com
+
 Source for background: https://opengameart.org/content/3-parallax-backgrounds

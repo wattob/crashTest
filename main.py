@@ -55,6 +55,7 @@ class player(object):
         self.jumpCount = 0
         self.runCount = 0
         self.slideUp = False
+        # needs self.falling = ??
 
     def draw(self, win):
         # animation for the character running, jumping, and sliding
