@@ -55,7 +55,7 @@ class player(object):
         self.jumpCount = 0
         self.runCount = 0
         self.slideUp = False
-        # needs self.falling = ??
+        self.falling = False
 
     def draw(self, win):
         # animation for the character running, jumping, and sliding
@@ -76,7 +76,7 @@ class player(object):
                 self.y -= 19
                 self.sliding = False
             elif self.slideCount > 20 and self.slideCount < 80:
-                self.hitbox = (self.x, self.y + 3, self.wdith - 8, self.height - 35)
+                self.hitbox = (self.x, self.y + 3, self.width - 8, self.height - 35)
                 self.slideUp = True
             if self.slideCount >= 110:
                 self.slideCount = 0
