@@ -11,7 +11,7 @@ W, H = 800, 750
 win = pygame.display.set_mode((W, H))
 pygame.display.set_caption('Side Scroller')
 
-bg = pygame.image.load(os.path.join('images', 'bg.png')).convert()
+bg = pygame.image.load(os.path.join('./../images/', 'bg.png')).convert()
 # background image
 bgX = 0
 bgX2 = bg.get_width()
@@ -21,22 +21,22 @@ clock = pygame.time.Clock()
 
 
 class player(object):
-    run = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in
+    run = [pygame.image.load(os.path.join('./../images/', str(x) + '.png')) for x in
            range(8, 16)]
-    jump = [pygame.image.load(os.path.join('images', str(x) + '.png')) for x in
+    jump = [pygame.image.load(os.path.join('./../images/', str(x) + '.png')) for x in
             range(1, 8)]
-    slide = [pygame.image.load(os.path.join('images', 'S1.png')), pygame.image.
-             load(os.path.join('images', 'S2.png')), pygame.image.load(
-             os.path.join('images', 'S2.png')), pygame.image.load(
-             os.path.join('images', 'S2.png')), pygame.image.load(
-             os.path.join('images', 'S2.png')), pygame.image.load(
-             os.path.join('images', 'S2.png')), pygame.image.load(
-             os.path.join('images', 'S2.png')), pygame.image.load(
-             os.path.join('images', 'S2.png')), pygame.image.load(
-             os.path.join('images', 'S3.png')), pygame.image.load(
-             os.path.join('images', 'S4.png')), pygame.image.load(
-             os.path.join('images', 'S5.png'))]
-    fall = pygame.image.load(os.path.join('images', '0.png'))
+    slide = [pygame.image.load(os.path.join('./../images/', 'S1.png')), pygame.image.
+             load(os.path.join('./../images/', 'S2.png')), pygame.image.load(
+             os.path.join('./../images/', 'S2.png')), pygame.image.load(
+             os.path.join('./../images/', 'S2.png')), pygame.image.load(
+             os.path.join('./../images/', 'S2.png')), pygame.image.load(
+             os.path.join('./../images/', 'S2.png')), pygame.image.load(
+             os.path.join('./../images/', 'S2.png')), pygame.image.load(
+             os.path.join('./../images/', 'S2.png')), pygame.image.load(
+             os.path.join('./../images/', 'S3.png')), pygame.image.load(
+             os.path.join('./../images/', 'S4.png')), pygame.image.load(
+             os.path.join('./../images/', 'S5.png'))]
+    fall = pygame.image.load(os.path.join('./../images/', '0.png'))
     jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3,
                 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -96,10 +96,10 @@ class player(object):
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
 class saw(object):
-    img = [pygame.image.load(os.path.join('images', 'SAW0.png')), pygame.image.
-           load(os.path.join('images', 'SAW1.png')), pygame.image.load(
-           os.path.join('images', 'SAW2.png')), pygame.image.load(
-           os.path.join('images', 'SAW3.png'))]
+    img = [pygame.image.load(os.path.join('./../images/', 'SAW0.png')), pygame.image.
+           load(os.path.join('./../images/', 'SAW1.png')), pygame.image.load(
+           os.path.join('./../images/', 'SAW2.png')), pygame.image.load(
+           os.path.join('./../images/', 'SAW3.png'))]
 
     def __init__(self, x, y, width, height):
         self.x = x
@@ -121,7 +121,7 @@ class saw(object):
 
 class spike(saw):
     # using saw makes def __init__ reused
-    img = pygame.image.load(os.path.join('images', 'spike.png'))
+    img = pygame.image.load(os.path.join('./../images/', 'spike.png'))
 
     def draw(self, win):
         self.hitbox = (self.x + 10, self.y, 28, 315)
