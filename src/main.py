@@ -21,10 +21,10 @@ clock = pygame.time.Clock()
 
 
 class player(object):
-    run = [pygame.image.load(os.path.join('./../images/', str(x)
-            + '.png')) for x in range(8, 16)]
-    jump = [pygame.image.load(os.path.join('./../images/', str(x)
-            + '.png')) for x in range(1, 8)]
+    run = [pygame.image.load(os.path.join('./../images/', str(x) +
+           '.png')) for x in range(8, 16)]
+    jump = [pygame.image.load(os.path.join('./../images/', str(x) +
+            '.png')) for x in range(1, 8)]
     slide = [pygame.image.load(os.path.join('./../images/', 'S1.png')),
              pygame.image.load(os.path.join('./../images/', 'S2.png')),
              pygame.image.load(os.path.join('./../images/', 'S2.png')),
