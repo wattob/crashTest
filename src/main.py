@@ -7,7 +7,7 @@ import math
 pygame.init()
 
 W, H = 800, 750
-# width and height of the screen because background is 447
+# width and height of the screen because background image is 800 by 750
 win = pygame.display.set_mode((W, H))
 pygame.display.set_caption('Side Scroller')
 
@@ -21,21 +21,21 @@ clock = pygame.time.Clock()
 
 
 class player(object):
-    run = [pygame.image.load(os.path.join('./../images/', str(x) + '.png')) for x in
-           range(8, 16)]
-    jump = [pygame.image.load(os.path.join('./../images/', str(x) + '.png')) for x in
-            range(1, 8)]
-    slide = [pygame.image.load(os.path.join('./../images/', 'S1.png')), pygame.image.
-             load(os.path.join('./../images/', 'S2.png')), pygame.image.load(
-             os.path.join('./../images/', 'S2.png')), pygame.image.load(
-             os.path.join('./../images/', 'S2.png')), pygame.image.load(
-             os.path.join('./../images/', 'S2.png')), pygame.image.load(
-             os.path.join('./../images/', 'S2.png')), pygame.image.load(
-             os.path.join('./../images/', 'S2.png')), pygame.image.load(
-             os.path.join('./../images/', 'S2.png')), pygame.image.load(
-             os.path.join('./../images/', 'S3.png')), pygame.image.load(
-             os.path.join('./../images/', 'S4.png')), pygame.image.load(
-             os.path.join('./../images/', 'S5.png'))]
+    run = [pygame.image.load(os.path.join('./../images/', str(x)
+            + '.png')) for x in range(8, 16)]
+    jump = [pygame.image.load(os.path.join('./../images/', str(x)
+            + '.png')) for x in range(1, 8)]
+    slide = [pygame.image.load(os.path.join('./../images/', 'S1.png')),
+             pygame.image.load(os.path.join('./../images/', 'S2.png')),
+             pygame.image.load(os.path.join('./../images/', 'S2.png')),
+             pygame.image.load(os.path.join('./../images/', 'S2.png')),
+             pygame.image.load(os.path.join('./../images/', 'S2.png')),
+             pygame.image.load(os.path.join('./../images/', 'S2.png')),
+             pygame.image.load(os.path.join('./../images/', 'S2.png')),
+             pygame.image.load(os.path.join('./../images/', 'S2.png')),
+             pygame.image.load(os.path.join('./../images/', 'S3.png')),
+             pygame.image.load(os.path.join('./../images/', 'S4.png')),
+             pygame.image.load(os.path.join('./../images/', 'S5.png'))]
     fall = pygame.image.load(os.path.join('./../images/', '0.png'))
     jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3,
                 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
@@ -68,7 +68,8 @@ class player(object):
                 self.jumping = False
                 self.runCount = 0
                 # hitbox for character while jumping
-                self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
+                self.hitbox = (self.x + 4, self.y, self.width - 24,
+                               self.height - 10)
         elif self.sliding or self.slideUp:
             if self.slideCount < 20:
                 self.y += 1
@@ -76,13 +77,15 @@ class player(object):
                 self.y -= 19
                 self.sliding = False
             elif self.slideCount > 20 and self.slideCount < 80:
-                self.hitbox = (self.x, self.y + 3, self.width - 8, self.height - 35)
+                self.hitbox = (self.x, self.y + 3, self.width - 8,
+                               self.height - 35)
                 self.slideUp = True
             if self.slideCount >= 110:
                 self.slideCount = 0
                 self.slideUp = False
                 self.runCount = 0
-                self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
+                self.hitbox = (self.x + 4, self.y, self.width - 24,
+                               self.height - 10)
             win.blit(self.slide[self.slideCount // 10], (self.x, self.y))
             self.slideCount += 1
         elif self.falling:
@@ -92,14 +95,16 @@ class player(object):
                 self.runCount = 0
             win.blit(self.run[self.runCount // 6], (self.x, self.y))
             self.runCount += 1
-            self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 13)
+            self.hitbox = (self.x + 4, self.y, self.width - 24,
+                           self.height - 13)
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
+
 class saw(object):
-    img = [pygame.image.load(os.path.join('./../images/', 'SAW0.png')), pygame.image.
-           load(os.path.join('./../images/', 'SAW1.png')), pygame.image.load(
-           os.path.join('./../images/', 'SAW2.png')), pygame.image.load(
-           os.path.join('./../images/', 'SAW3.png'))]
+    img = [pygame.image.load(os.path.join('./../images/', 'SAW0.png')),
+           pygame.image.load(os.path.join('./../images/', 'SAW1.png')),
+           pygame.image.load(os.path.join('./../images/', 'SAW2.png')),
+           pygame.image.load(os.path.join('./../images/', 'SAW3.png'))]
 
     def __init__(self, x, y, width, height):
         self.x = x
