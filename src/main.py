@@ -123,6 +123,7 @@ class saw(object):
         self.count += 1
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
+    def collide():
 
 class spike(saw):
     # using saw makes def __init__ reused
