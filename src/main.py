@@ -65,7 +65,7 @@ class player(object):
             win.blit(self.jump[self.jumpCount // 18], (self.x, self.y))
             # blit(image, (left, top))
             # Draw the image to the screen at the given position
-            # blit() accepts either a Surface or a string as its image parameter
+            # blit() accepts either Surface or string as its image parameter
             self.jumpCount += 1
             if self.jumpCount > 108:
                 self.jumpCount = 0
@@ -124,10 +124,12 @@ class box(object):
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
     def collide(self, rect):
-        if rect[0] + rect [2] > self.hitbox[0] and rect[0] < self.hitbox[0] + self.hitbox[2]:
+        if rect[0] + rect [2] > self.hitbox [0] and rect [0] < self.hitbox [0] +
+            self.hitbox [2]:
             if rect[1] + rect[3] > self.hitbox[1]:
                 return True
             return False
+
 
 def redrawWindow():
     win.blit(bg, (bgX, 0))
@@ -143,8 +145,8 @@ runner = player(200, 470, 64, 64)
 # location of the character on the background
 pygame.time.set_timer(USEREVENT + 1, 500)
 # in milliseconds so every half second increase speed by calling this event
-pygame.time.set_timer(USEREVENT + 2, random.randrange(3000,5000))
-#between 2 seconds and 3.5
+pygame.time.set_timer(USEREVENT + 2, random.randrange(2000, 3500))
+# between 2 seconds and 3.5
 speed = 30
 run = True
 objects = []
@@ -154,7 +156,7 @@ while run:
 
     for objectt in objects:
         if objectt.collide(runner.hitbox):
-        # runner is variable for player
+            #runner is variable for player
             runner.falling = True
 
         objectt.x -= 1.4
@@ -162,7 +164,6 @@ while run:
         if objectt.x < -objectt.width * -1:
             objects.pop(objects.index(objectt))
             # if off the screen pop removes object at the index
-
 
     bgX -= 1.4
     # larger number makes background go faster
@@ -186,7 +187,7 @@ while run:
         if event.type == USEREVENT + 1:
             speed += 1
         if event.type == USEREVENT + 2:
-            r = random.randrange(0,2)
+            r = random.randrange(0, 2)
             if r == 0:
                 objects.append(box(810, 470, 64, 64))
 
