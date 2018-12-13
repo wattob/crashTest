@@ -124,8 +124,8 @@ class box(object):
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
     def collide(self, rect):
-        if rect[0] + rect[2] > self.hitbox[0] and rect[0] < self.hitbox[0] +
-         self.hitbox[2]:
+        if (rect[0] + rect[2] > self.hitbox[0] and
+            rect[0] < self.hitbox[0] + self.hitbox[2]):
             if rect[1] + rect[3] > self.hitbox[1]:
                 return True
             return False
