@@ -3,6 +3,7 @@ from pygame.locals import *
 import os
 import sys
 import math
+import random
 
 pygame.init()
 
@@ -62,6 +63,9 @@ class player(object):
         if self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.2
             win.blit(self.jump[self.jumpCount // 18], (self.x, self.y))
+            # blit(image, (left, top))
+            # Draw the image to the screen at the given position
+            # blit() accepts either Surface or string as its image parameter
             self.jumpCount += 1
             if self.jumpCount > 108:
                 self.jumpCount = 0
@@ -100,11 +104,8 @@ class player(object):
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
 
-class saw(object):
-    img = [pygame.image.load(os.path.join('./../images/', 'SAW0.png')),
-           pygame.image.load(os.path.join('./../images/', 'SAW1.png')),
-           pygame.image.load(os.path.join('./../images/', 'SAW2.png')),
-           pygame.image.load(os.path.join('./../images/', 'SAW3.png'))]
+class box(object):
+    img = pygame.image.load(os.path.join('./../images/', 'Box.png'))
 
     def __init__(self, x, y, width, height):
         self.x = x
@@ -118,26 +119,24 @@ class saw(object):
         self.hitbox = (self.x + 5, self.y + 5, self.width - 10, self.height)
         if self.count >= 8:
             self.count = 0
-        win.blit(pygame.transform.scale(self.img[self.count // 2], (64, 64)), (
-                 self.x, self.y))
+        win.blit(pygame.transform.scale(self.img, (64, 64)), (self.x, self.y))
         self.count += 1
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
-
-class spike(saw):
-    # using saw makes def __init__ reused
-    img = pygame.image.load(os.path.join('./../images/', 'spike.png'))
-
-    def draw(self, win):
-        self.hitbox = (self.x + 10, self.y, 28, 315)
-        win.blit(self.img, (self.x, self.y))
-        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
+    def collide(self, rect):
+        if (rect[0] + rect[2] > self.hitbox[0] and
+                rect[0] < self.hitbox[0] + self.hitbox[2]):
+            if rect[1] + rect[3] > self.hitbox[1]:
+                return True
+            return False
 
 
 def redrawWindow():
     win.blit(bg, (bgX, 0))
     win.blit(bg, (bgX2, 0))
     runner.draw(win)
+    for x in objects:
+        x.draw(win)
 
     pygame.display.update()
 
@@ -146,10 +145,26 @@ runner = player(200, 470, 64, 64)
 # location of the character on the background
 pygame.time.set_timer(USEREVENT + 1, 500)
 # in milliseconds so every half second increase speed by calling this event
+pygame.time.set_timer(USEREVENT + 2, random.randrange(2000, 3500))
+# between 2 seconds and 3.5
 speed = 30
 run = True
+objects = []
+
 while run:
     redrawWindow()
+
+    for objectt in objects:
+        if objectt.collide(runner.hitbox):
+            # runner is variable for player
+            runner.falling = True
+
+        objectt.x -= 1.4
+        # moves x value of object to create appearance of sliding
+        if objectt.x < -objectt.width * -1:
+            objects.pop(objects.index(objectt))
+            # if off the screen pop removes object at the index
+
     bgX -= 1.4
     # larger number makes background go faster
     bgX2 -= 1.4
@@ -171,6 +186,10 @@ while run:
             quit()
         if event.type == USEREVENT + 1:
             speed += 1
+        if event.type == USEREVENT + 2:
+            r = random.randrange(0, 2)
+            if r == 0:
+                objects.append(box(810, 470, 64, 64))
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
