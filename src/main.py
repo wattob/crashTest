@@ -74,7 +74,8 @@ class player(object):
                 self.jumping = False
                 self.runCount = 0
                 # hitbox for character while jumping
-            self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
+            self.hitbox = (self.x + 4, self.y, self.width - 24,
+                           self.height - 10)
         elif self.sliding or self.slideUp:
             if self.slideCount < 20:
                 self.y += 1
@@ -147,6 +148,7 @@ def redrawWindow():
     win.blit(text, (700, 10))
     pygame.display.update()
 
+
 def updateFile():
     f = open('scores.txt', 'r')
     file = f.readlines()
@@ -161,6 +163,7 @@ def updateFile():
         return score
 
     return last
+
 
 def endScreen():
     global pause, objects, speed, score
@@ -180,7 +183,8 @@ def endScreen():
                 run = False
         win.blit(bg, (0, 0))
         largeFont = pygame.font.SysFont('comicsans', 80)
-        previousScore = largeFont.render('Previous Score: ' + str(updateFile()), 1, (255, 255, 255))
+        previousScore = largeFont.render('Previous Score: ' +
+            str(updateFile()), 1, (255, 255, 255))
         win.blit(previousScore, (W / 2 - previousScore.get_width() / 2, 200))
         newScore = largeFont.render('Score: ' + str(score), 1, (255, 255, 255))
         win.blit(newScore, (W / 2 - newScore.get_width() / 2, 320))
