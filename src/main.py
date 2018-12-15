@@ -7,7 +7,7 @@ import random
 
 pygame.init()
 
-W, H = 800, 750
+W, H = 800, 600
 # width and height of the screen because background image is 800 by 750
 win = pygame.display.set_mode((W, H))
 pygame.display.set_caption('Side Scroller')
@@ -137,6 +137,38 @@ class box(object):
             return False
 
 
+class bat(object):
+    img = [pygame.image.load(os.path.join('./../images/','BAT0.png')),pygame.image.load(os.path.join('./../images/','BAT1.png')),pygame.image.load(os.path.join('./../images/','BAT2.png')),pygame.image.load(os.path.join('./../images/','BAT3.png'))]
+
+    def __init__(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.hitbox = (x, y, width, height)
+        self.count = 0
+
+    def draw(self, win):
+        self.hitbox = (self.x + 5, self.y + 5, self.width - 10, self.height)
+        if self.count >= 8:
+            self.count = 0
+        win.blit(self.img[self.count//2], (self.x,self.y))
+        self.count += 1
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
+
+    def collide(self, rect):
+        # rect takes hitbox of the player
+        if (rect[0] + rect[2] > self.hitbox[0] and
+                rect[0] < self.hitbox[0] + self.hitbox[2]):
+                # rect [0] is the x position of the player
+                # rect[2] is the width
+                # checks if the x coordinates are within each other
+            if rect[1] + rect[3] > self.hitbox[1]:
+                # checks the y coordinates are within each other
+                return True
+            return False
+
+
 def redrawWindow():
     win.blit(bg, (bgX, 0))
     win.blit(bg, (bgX2, 0))
@@ -144,7 +176,7 @@ def redrawWindow():
     for x in objects:
         x.draw(win)
     font = pygame.font.SysFont('comicsans', 30)
-    text = font.render('Score: ' + str(score), 1, (255, 255, 255))
+    text = font.render('Score: ' + str(score), 1, (0, 0, 0))
     win.blit(text, (700, 10))
     pygame.display.update()
 
@@ -182,12 +214,15 @@ def endScreen():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 run = False
         win.blit(bg, (0, 0))
-        largeFont = pygame.font.SysFont('comicsans', 80)
+        largeFont = pygame.font.SysFont('comicsans', 70)
         previousScore = largeFont.render('Previous Score: ' +
-            str(updateFile()), 1, (255, 255, 255))
+            str(updateFile()), 1, (0, 0, 0))
         win.blit(previousScore, (W / 2 - previousScore.get_width() / 2, 200))
-        newScore = largeFont.render('Score: ' + str(score), 1, (255, 255, 255))
+        newScore = largeFont.render('Score: ' + str(score), 1, (0, 0, 0))
         win.blit(newScore, (W / 2 - newScore.get_width() / 2, 320))
+        play = largeFont.render('Click the screen to Play Again!', 1, (0, 0, 0))
+        win.blit(play, (1, 440))
+
         pygame.display.update()
 
     score = 0
@@ -197,8 +232,8 @@ runner = player(200, 470, 64, 64)
 # location of the character on the background
 pygame.time.set_timer(USEREVENT + 1, 500)
 # in milliseconds so every half second increase speed by calling this event
-pygame.time.set_timer(USEREVENT + 2, random.randrange(2000, 4000))
-# between 2 seconds and 3.5
+pygame.time.set_timer(USEREVENT + 2, random.randrange(2000, 5000))
+# between 2 seconds and 5
 speed = 30
 run = True
 pause = 0
@@ -251,6 +286,8 @@ while run:
             r = random.randrange(0, 2)
             if r == 0:
                 objects.append(box(810, 470, 64, 64))
+            else:
+                objects.append(bat(810, 400, 64, 64))
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_SPACE] or keys[pygame.K_UP]:

@@ -22,4 +22,6 @@ Source for crash test dummy character: https://opengameart.org/content/crash-tes
 
 Source for background: https://opengameart.org/content/3-parallax-backgrounds
 
-Source for box: https://opengameart.org/content/box-0
+Source for Box: https://opengameart.org/content/box-0
+
+Source for bat: https://opengameart.org/content/bat
