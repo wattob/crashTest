@@ -60,7 +60,9 @@ class player(object):
 
     def draw(self, win):
         # animation for the character running, jumping, and sliding
-        if self.jumping:
+        if self.falling:
+            win.blit(self.fall, (self.x, self.y + 30))
+        elif self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.2
             win.blit(self.jump[self.jumpCount // 18], (self.x, self.y))
             # blit(image, (left, top))
@@ -72,8 +74,7 @@ class player(object):
                 self.jumping = False
                 self.runCount = 0
                 # hitbox for character while jumping
-                self.hitbox = (self.x + 4, self.y, self.width - 24,
-                               self.height - 10)
+            self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
         elif self.sliding or self.slideUp:
             if self.slideCount < 20:
                 self.y += 1
@@ -92,8 +93,7 @@ class player(object):
                                self.height - 10)
             win.blit(self.slide[self.slideCount // 10], (self.x, self.y))
             self.slideCount += 1
-        elif self.falling:
-            win.blit(self.fall, (self.x, self.y + 30))
+
         else:
             if self.runCount > 42:
                 self.runCount = 0
@@ -124,9 +124,14 @@ class box(object):
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
     def collide(self, rect):
+        # rect takes hitbox of the player
         if (rect[0] + rect[2] > self.hitbox[0] and
                 rect[0] < self.hitbox[0] + self.hitbox[2]):
+                # rect [0] is the x position of the player
+                # rect[2] is the width
+                # checks if the x coordinates are within each other
             if rect[1] + rect[3] > self.hitbox[1]:
+                # checks the y coordinates are within each other
                 return True
             return False
 
@@ -137,28 +142,80 @@ def redrawWindow():
     runner.draw(win)
     for x in objects:
         x.draw(win)
-
+    font = pygame.font.SysFont('comicsans', 30)
+    text = font.render('Score: ' + str(score), 1, (255, 255, 255))
+    win.blit(text, (700, 10))
     pygame.display.update()
 
+def updateFile():
+    f = open('scores.txt', 'r')
+    file = f.readlines()
+    last = int(file[0])
+
+    if last < int(score):
+        f.close()
+        file = open('scores.txt', 'w')
+        file.write(str(score))
+        file.close()
+
+        return score
+
+    return last
+
+def endScreen():
+    global pause, objects, speed, score
+    # name of all the variables we want to change and access
+    pause = 0
+    objects = []
+    speed = 30
+
+    run = True
+    while run:
+        pygame.time.delay(100)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                run = False
+        win.blit(bg, (0, 0))
+        largeFont = pygame.font.SysFont('comicsans', 80)
+        previousScore = largeFont.render('Previous Score: ' + str(updateFile()), 1, (255, 255, 255))
+        win.blit(previousScore, (W / 2 - previousScore.get_width() / 2, 200))
+        newScore = largeFont.render('Score: ' + str(score), 1, (255, 255, 255))
+        win.blit(newScore, (W / 2 - newScore.get_width() / 2, 320))
+        pygame.display.update()
+
+    score = 0
+    runner.falling = False
 
 runner = player(200, 470, 64, 64)
 # location of the character on the background
 pygame.time.set_timer(USEREVENT + 1, 500)
 # in milliseconds so every half second increase speed by calling this event
-pygame.time.set_timer(USEREVENT + 2, random.randrange(2000, 3500))
+pygame.time.set_timer(USEREVENT + 2, random.randrange(2000, 4000))
 # between 2 seconds and 3.5
 speed = 30
 run = True
+pause = 0
+fallSpeed = 0
 objects = []
 
 while run:
-    redrawWindow()
+    score = speed // 2 - 15
+    if pause > 0:
+        pause += 1
+        if pause > fallSpeed * 2:
+            endScreen()
 
     for objectt in objects:
         if objectt.collide(runner.hitbox):
             # runner is variable for player
+            # executes what happens when he gets hit
             runner.falling = True
-
+            if pause == 0:
+                fallSpeed = speed
+                pause = 1
         objectt.x -= 1.4
         # moves x value of object to create appearance of sliding
         if objectt.x < -objectt.width * -1:
@@ -204,3 +261,4 @@ while run:
             runner.sliding = True
 
     clock.tick(speed)
+    redrawWindow()
