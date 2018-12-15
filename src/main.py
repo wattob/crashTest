@@ -132,7 +132,8 @@ class box(object):
         self.hitbox = (self.x + 5, self.y + 5, 30, 30)
         if self.count >= 8:
             self.count = 0
-        window.blit(pygame.transform.scale(self.img, (64, 64)), (self.x, self.y))
+        window.blit(pygame.transform.scale(self.img, (64, 64)),
+                   (self.x, self.y))
         self.count += 1
         pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
 
@@ -239,7 +240,8 @@ def endScreen():
         largeFont = pygame.font.SysFont('comicsans', 70)
         previousScore = largeFont.render('Previous Score: ' +
                                          str(updateFile()), 1, (0, 0, 0))
-        window.blit(previousScore, (W / 2 - previousScore.get_width() / 2, 200))
+        window.blit(previousScore, (W / 2 - previousScore.get_width() /
+                                    2, 200))
         newScore = largeFont.render('Score: ' + str(score), 1, (0, 0, 0))
         window.blit(newScore, (W / 2 - newScore.get_width() / 2, 320))
         play = largeFont.render('Click the screen to Play Again!', 1,
@@ -296,7 +298,7 @@ while run:
         # first background image starting at 0,0 starts moving until it gets to
         # the negative width of the background
         bgX = bg.get_width()
-        # after it is at its negative width it is no longer on screen or visible
+        # after it is at its negative width it is no longer on screen
     if bgX2 < bg.get_width() * -1:
         # 2nd background object that comes onto screen after first image is off
         # screen to give the appearance of continous running background
