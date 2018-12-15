@@ -138,7 +138,10 @@ class box(object):
 
 
 class bat(object):
-    img = [pygame.image.load(os.path.join('./../images/','BAT0.png')),pygame.image.load(os.path.join('./../images/','BAT1.png')),pygame.image.load(os.path.join('./../images/','BAT2.png')),pygame.image.load(os.path.join('./../images/','BAT3.png'))]
+    img = [pygame.image.load(os.path.join('./../images/', 'BAT0.png')),
+           pygame.image.load(os.path.join('./../images/', 'BAT1.png')),
+           pygame.image.load(os.path.join('./../images/', 'BAT2.png')),
+           pygame.image.load(os.path.join('./../images/', 'BAT3.png'))]
 
     def __init__(self, x, y, width, height):
         self.x = x
@@ -152,7 +155,7 @@ class bat(object):
         self.hitbox = (self.x + 5, self.y + 5, self.width - 10, self.height)
         if self.count >= 8:
             self.count = 0
-        win.blit(self.img[self.count//2], (self.x,self.y))
+        win.blit(self.img[self.count // 2], (self.x, self.y))
         self.count += 1
         pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
@@ -216,11 +219,12 @@ def endScreen():
         win.blit(bg, (0, 0))
         largeFont = pygame.font.SysFont('comicsans', 70)
         previousScore = largeFont.render('Previous Score: ' +
-            str(updateFile()), 1, (0, 0, 0))
+                                         str(updateFile()), 1, (0, 0, 0))
         win.blit(previousScore, (W / 2 - previousScore.get_width() / 2, 200))
         newScore = largeFont.render('Score: ' + str(score), 1, (0, 0, 0))
         win.blit(newScore, (W / 2 - newScore.get_width() / 2, 320))
-        play = largeFont.render('Click the screen to Play Again!', 1, (0, 0, 0))
+        play = largeFont.render('Click the screen to Play Again!', 1,
+                                (0, 0, 0))
         win.blit(play, (1, 440))
 
         pygame.display.update()
