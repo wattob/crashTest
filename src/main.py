@@ -115,7 +115,7 @@ class player(object):
             self.runCount += 1
             self.hitbox = (self.x + 4, self.y, self.width - 24,
                            self.height - 13)
-        pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
+        # pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
         # draws a red rectangle around character while running, jumping,
         # and sliding
 
@@ -137,16 +137,14 @@ class box(object):
     def draw(self, window):
         # creates hitbox to be used by the box
         self.hitbox = (self.x, self.y + 5, 55, 55)
-        # if self.count >= 8:
-        #     self.count = 0
-            # resets count variable to 0
+        # resets count variable to 0
         # draws image in the screen for box
         # and transforms to fit our screen and style
         window.blit(pygame.transform.scale(self.img, (55, 55)),
                     (self.x, self.y))
         # incrementing count
         self.count += 1
-        pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
+        # pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
         # draws a red outline of the boxes hitbox
 
     def collide(self, rect):
@@ -186,11 +184,12 @@ class bat(object):
             self.count = 0
             # resets count variable to 0
         # adds our image to the window
-        window.blit(pygame.transform.scale(self.img[self.count // 2], (40, 40)), (self.x, self.y))
+        window.blit(pygame.transform.scale(self.img[self.count // 2], (40, 40)),
+                                          (self.x, self.y))
         # interger division by 2
         self.count += 1
         # incrementing count
-        pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
+        # pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
         # draws hitbox for bat character
 
     def collide(self, rect):
@@ -200,7 +199,8 @@ class bat(object):
                 # rect [0] is the x position of the player
                 # rect[2] is the width
                 # checks if the x coordinates are within each other
-            if rect[1] + rect[3] < self.hitbox[1] + self.hitbox[3]:
+            if (rect[1] + rect[3] > self.hitbox[1] and
+                    rect[1] < self.hitbox[1] + self.hitbox[3]):
                 # if player goes above bat object than collide will return true
                 # checks the y coordinates are within each other
                 return True
