@@ -28,10 +28,10 @@ clock = pygame.time.Clock()
 class player(object):
     # player class
     run = [pygame.image.load(os.path.join('./../images/', str(x) +
-           '.png')) for x in range(8, 16)]
+           '.png')) for x in range(5, 11)]
     # loading in the images for run animation from the images folder
     jump = [pygame.image.load(os.path.join('./../images/', str(x) +
-            '.png')) for x in range(1, 8)]
+            '.png')) for x in range(1, 4)]
     # loading in the images for jump animation from the images folder
     slide = [pygame.image.load(os.path.join('./../images/', 'S1.png')),
              pygame.image.load(os.path.join('./../images/', 'S2.png')),
@@ -69,14 +69,13 @@ class player(object):
         self.falling = False
 
     # animation for character running, jumping, sliding, and falling
-    # source: https://github.com/techwithtim/side_scroller
     def draw(self, window):
         # animation for the character running, jumping, and sliding
         if self.falling:
             window.blit(self.fall, (self.x, self.y + 30))
         elif self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.2
-            window.blit(self.jump[self.jumpCount // 18], (self.x, self.y))
+            window.blit(self.jump[self.jumpCount // 38], (self.x, self.y))
             # blit(image, (left, top))
             # Draw the image to the screen at the given position
             # blit() accepts either Surface or string as its image parameter
@@ -110,7 +109,7 @@ class player(object):
         else:
             if self.runCount > 42:
                 self.runCount = 0
-            window.blit(self.run[self.runCount // 6], (self.x, self.y))
+            window.blit(self.run[self.runCount // 8], (self.x, self.y))
             self.runCount += 1
             self.hitbox = (self.x + 4, self.y, self.width - 24,
                            self.height - 13)
@@ -133,7 +132,7 @@ class box(object):
         if self.count >= 8:
             self.count = 0
         window.blit(pygame.transform.scale(self.img, (64, 64)),
-                   (self.x, self.y))
+                    (self.x, self.y))
         self.count += 1
         pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
 

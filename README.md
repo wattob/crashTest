@@ -15,13 +15,13 @@ This project is still in development so there are not many tangible results. Cur
 
 Here is an example of the program in action:
 
-![Logo](images/example.png)
+![Program in Action](images/example.png)
 
 ## Source
-Source for crash test dummy character: https://opengameart.org/content/crash-test-dummy
+Source for character: https://opengameart.org/content/running-and-jumping-kid-sprite-sheets
 
 Source for background: https://opengameart.org/content/3-parallax-backgrounds
 
-Source for Box: https://opengameart.org/content/box-0
+Source for box: https://opengameart.org/content/box-0
 
 Source for bat: https://opengameart.org/content/bat
