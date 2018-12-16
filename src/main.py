@@ -113,8 +113,9 @@ class player(object):
             self.runCount += 1
             self.hitbox = (self.x + 4, self.y, self.width - 24,
                            self.height - 13)
-        pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
-
+        # pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
+        # draws a red rectangle around character while running, jumping,
+        # and sliding
 
 class box(object):
     img = pygame.image.load(os.path.join('./../images/', 'Box.png'))
@@ -134,8 +135,8 @@ class box(object):
         window.blit(pygame.transform.scale(self.img, (64, 64)),
                     (self.x, self.y))
         self.count += 1
-        pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
-
+        # pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
+        # draws a red outline of the boxes hitbox
     def collide(self, rect):
         # rect takes hitbox of the player
         if (rect[0] + rect[2] > self.hitbox[0] and
@@ -167,9 +168,10 @@ class bat(object):
         self.hitbox = (self.x, self.y, 35, 35)
         if self.count >= 8:
             self.count = 0
-        window.blit(self.img[self.count // 2], (self.x, self.y))
+        window.blit(self.img[self.count // 4], (self.x, self.y))
         self.count += 1
         pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
+        # draws hitbox for bat character
 
     def collide(self, rect):
         # rect takes hitbox of the player
