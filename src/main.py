@@ -69,8 +69,10 @@ class player(object):
         self.falling = False
 
     # animation for character running, jumping, sliding, and falling
+    # character animiation source: https://github.com/techwithtim/side_scroller
     def draw(self, window):
         # animation for the character running, jumping, and sliding
+        # speeds up animation while screen background speeds up
         if self.falling:
             window.blit(self.fall, (self.x, self.y + 30))
         elif self.jumping:
@@ -113,15 +115,18 @@ class player(object):
             self.runCount += 1
             self.hitbox = (self.x + 4, self.y, self.width - 24,
                            self.height - 13)
-        # pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
+        pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
         # draws a red rectangle around character while running, jumping,
         # and sliding
 
 
 class box(object):
+    # class for box object that inherits from object
     img = pygame.image.load(os.path.join('./../images/', 'Box.png'))
+    # loading image for box object
 
     def __init__(self, x, y, width, height):
+        # initialization method for variables
         self.x = x
         self.y = y
         self.width = width
@@ -130,13 +135,18 @@ class box(object):
         self.count = 0
 
     def draw(self, window):
-        self.hitbox = (self.x + 5, self.y + 5, 30, 30)
-        if self.count >= 8:
-            self.count = 0
-        window.blit(pygame.transform.scale(self.img, (64, 64)),
+        # creates hitbox to be used by the box
+        self.hitbox = (self.x, self.y + 5, 55, 55)
+        # if self.count >= 8:
+        #     self.count = 0
+            # resets count variable to 0
+        # draws image in the screen for box
+        # and transforms to fit our screen and style
+        window.blit(pygame.transform.scale(self.img, (55, 55)),
                     (self.x, self.y))
+        # incrementing count
         self.count += 1
-        # pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
+        pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
         # draws a red outline of the boxes hitbox
 
     def collide(self, rect):
@@ -153,12 +163,15 @@ class box(object):
 
 
 class bat(object):
+    # class for bat object that inherits from object
     img = [pygame.image.load(os.path.join('./../images/', 'BAT0.png')),
            pygame.image.load(os.path.join('./../images/', 'BAT1.png')),
            pygame.image.load(os.path.join('./../images/', 'BAT2.png')),
            pygame.image.load(os.path.join('./../images/', 'BAT3.png'))]
+    # loading images for bat object
 
     def __init__(self, x, y, width, height):
+        # initialization method for variables
         self.x = x
         self.y = y
         self.width = width
@@ -167,11 +180,16 @@ class bat(object):
         self.count = 0
 
     def draw(self, window):
-        self.hitbox = (self.x, self.y, 35, 35)
+        # draws the hitbox
+        self.hitbox = (self.x, self.y, 40, 40)
         if self.count >= 8:
             self.count = 0
-        window.blit(self.img[self.count // 4], (self.x, self.y))
+            # resets count variable to 0
+        # adds our image to the window
+        window.blit(pygame.transform.scale(self.img[self.count // 2], (40, 40)), (self.x, self.y))
+        # interger division by 2
         self.count += 1
+        # incrementing count
         pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
         # draws hitbox for bat character
 
@@ -182,7 +200,8 @@ class bat(object):
                 # rect [0] is the x position of the player
                 # rect[2] is the width
                 # checks if the x coordinates are within each other
-            if rect[1] + rect[3] > self.hitbox[1]:
+            if rect[1] + rect[3] < self.hitbox[1] + self.hitbox[3]:
+                # if player goes above bat object than collide will return true
                 # checks the y coordinates are within each other
                 return True
             return False
@@ -202,7 +221,7 @@ def drawWindow():
     window.blit(text, (700, 10))
     instructions = font.render('Use UP and DOWN Keys to jump and slide!',
                                1, (0, 0, 0))
-    window.blit(instructions, (100, 10))
+    window.blit(instructions, (10, 10))
     pygame.display.update()
     # updates to add all the objects
 
@@ -249,7 +268,7 @@ def endScreen():
         window.blit(newScore, (W / 2 - newScore.get_width() / 2, 320))
         play = largeFont.render('Click the screen to Play Again!', 1,
                                 (0, 0, 0))
-        window.blit(play, (1, 440))
+        window.blit(play, (50, 440))
 
         pygame.display.update()
 
@@ -261,13 +280,14 @@ character = player(200, 470, 64, 64)
 pygame.time.set_timer(USEREVENT + 1, 500)
 # timer event used to make screen go faster
 # in milliseconds so every half second increase speed by calling USEREVENT
-pygame.time.set_timer(USEREVENT + 2, random.randrange(2000, 5000))
-# between 2 seconds and 5
+pygame.time.set_timer(USEREVENT + 2, random.randrange(2500, 5000))
+# timer event that happens between 2 seconds and 5 to append objects
 speed = 30
 run = True
 pause = 0
 fallSpeed = 0
 objects = []
+# blank list for objects to be appended to
 
 while run:
     # main loop for Game
@@ -317,14 +337,17 @@ while run:
             speed += 1
             # increasing speed for every time USEREVENT is called
         if event.type == USEREVENT + 2:
+            # randomly selects the objects to append
             r = random.randrange(0, 3)
             if r == 0:
-                objects.append(box(810, 470, 64, 64))
+                objects.append(box(800, 480, 55, 55))
+                # appends box object to objects []
             else:
-                # if r == 1:
-                    objects.append(bat(810, 400, 64, 64))
-                # if r == 2:
-                #     objects.append(bat(810, 470, 64, 64))
+                if r == 1:
+                    objects.append(bat(800, 410, 40, 40))
+                    # appends bat object to objects []
+                if r == 2:
+                    objects.append(bat(810, 440, 40, 40))
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
