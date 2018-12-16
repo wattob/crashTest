@@ -184,8 +184,8 @@ class bat(object):
             self.count = 0
             # resets count variable to 0
         # adds our image to the window
-        window.blit(pygame.transform.scale(self.img[self.count // 2], (40, 40)),
-                                          (self.x, self.y))
+        window.blit(pygame.transform.scale(self.img[self.count // 2],
+                   (40, 40)), (self.x, self.y))
         # interger division by 2
         self.count += 1
         # incrementing count
