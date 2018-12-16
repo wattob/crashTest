@@ -7,46 +7,38 @@ import random
 # imports to be used
 
 pygame.init()
-
-W, H = 800, 600
-# width and height of the screen
-# background image is 800 by 600
-window = pygame.display.set_mode((W, H))
-pygame.display.set_caption('Side Scroller Game')
-# creates caption at the top of pygame window
-
-bg = pygame.image.load(os.path.join('./../images/', 'bg.png')).convert()
-# background image which is in the images folder
-bgX = 0
-# used to keep track of x position of two different images
-bgX2 = bg.get_width()
-
+# This will initialize all the pygame modules
 clock = pygame.time.Clock()
 # used to change the FPS as the player moves
 
-
 class player(object):
     # player class
-    run = [pygame.image.load(os.path.join('./../images/', str(x) +
-           '.png')) for x in range(5, 11)]
-    # loading in the images for run animation from the images folder
-    jump = [pygame.image.load(os.path.join('./../images/', str(x) +
-            '.png')) for x in range(1, 4)]
-    # loading in the images for jump animation from the images folder
-    slide = [pygame.image.load(os.path.join('./../images/', 'S1.png')),
-             pygame.image.load(os.path.join('./../images/', 'S2.png')),
-             pygame.image.load(os.path.join('./../images/', 'S2.png')),
-             pygame.image.load(os.path.join('./../images/', 'S2.png')),
-             pygame.image.load(os.path.join('./../images/', 'S2.png')),
-             pygame.image.load(os.path.join('./../images/', 'S2.png')),
-             pygame.image.load(os.path.join('./../images/', 'S2.png')),
-             pygame.image.load(os.path.join('./../images/', 'S2.png')),
-             pygame.image.load(os.path.join('./../images/', 'S3.png')),
-             pygame.image.load(os.path.join('./../images/', 'S4.png')),
-             pygame.image.load(os.path.join('./../images/', 'S5.png'))]
-    # loading in the images for slide animation from the images folder
-    fall = pygame.image.load(os.path.join('./../images/', '0.png'))
+    hurt = pygame.image.load(os.path.join('./../images/', 'hurt.png'))
     # loading in the images for the fall animation from the images folder
+    jump = [pygame.image.load(os.path.join('./../images/', 'jump1.png')),
+            pygame.image.load(os.path.join('./../images/', 'jump2.png')),
+            pygame.image.load(os.path.join('./../images/', 'jump3.png')),
+            pygame.image.load(os.path.join('./../images/', 'jump4.png'))]
+    # loading in the images for jump from the images folder
+    run =  [pygame.image.load(os.path.join('./../images/', 'run1.png')),
+            pygame.image.load(os.path.join('./../images/', 'run2.png')),
+            pygame.image.load(os.path.join('./../images/', 'run3.png')),
+            pygame.image.load(os.path.join('./../images/', 'run4.png')),
+            pygame.image.load(os.path.join('./../images/', 'run5.png')),
+            pygame.image.load(os.path.join('./../images/', 'run6.png'))]
+    # loading in the images for run from the images folder
+    slide = [pygame.image.load(os.path.join('./../images/', 'slide1.png')),
+             pygame.image.load(os.path.join('./../images/', 'slide2.png')),
+             pygame.image.load(os.path.join('./../images/', 'slide2.png')),
+             pygame.image.load(os.path.join('./../images/', 'slide2.png')),
+             pygame.image.load(os.path.join('./../images/', 'slide2.png')),
+             pygame.image.load(os.path.join('./../images/', 'slide2.png')),
+             pygame.image.load(os.path.join('./../images/', 'slide2.png')),
+             pygame.image.load(os.path.join('./../images/', 'slide2.png')),
+             pygame.image.load(os.path.join('./../images/', 'slide3.png')),
+             pygame.image.load(os.path.join('./../images/', 'slide4.png')),
+             pygame.image.load(os.path.join('./../images/', 'slide5.png'))]
+    # loading in the images for slide  from the images folder
     jumpList = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3,
                 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -69,12 +61,11 @@ class player(object):
         self.falling = False
 
     # animation for character running, jumping, sliding, and falling
-    # character animiation source: https://github.com/techwithtim/side_scroller
     def draw(self, window):
         # animation for the character running, jumping, and sliding
         # speeds up animation while screen background speeds up
         if self.falling:
-            window.blit(self.fall, (self.x, self.y + 30))
+            window.blit(self.hurt, (self.x, self.y + 30))
         elif self.jumping:
             self.y -= self.jumpList[self.jumpCount] * 1.2
             window.blit(self.jump[self.jumpCount // 38], (self.x, self.y))
@@ -122,7 +113,7 @@ class player(object):
 
 class box(object):
     # class for box object that inherits from object
-    img = pygame.image.load(os.path.join('./../images/', 'Box.png'))
+    img = pygame.image.load(os.path.join('./../images/', 'box.png'))
     # loading image for box object
 
     def __init__(self, x, y, width, height):
@@ -162,10 +153,10 @@ class box(object):
 
 class bat(object):
     # class for bat object that inherits from object
-    img = [pygame.image.load(os.path.join('./../images/', 'BAT0.png')),
-           pygame.image.load(os.path.join('./../images/', 'BAT1.png')),
-           pygame.image.load(os.path.join('./../images/', 'BAT2.png')),
-           pygame.image.load(os.path.join('./../images/', 'BAT3.png'))]
+    img = [pygame.image.load(os.path.join('./../images/', 'bat1.png')),
+           pygame.image.load(os.path.join('./../images/', 'bat2.png')),
+           pygame.image.load(os.path.join('./../images/', 'bat3.png')),
+           pygame.image.load(os.path.join('./../images/', 'bat4.png'))]
     # loading images for bat object
 
     def __init__(self, x, y, width, height):
@@ -260,11 +251,11 @@ def endScreen():
                 run = False
         window.blit(bg, (0, 0))
         largeFont = pygame.font.SysFont('comicsans', 70)
-        previousScore = largeFont.render('Previous Score: ' +
+        highScore = largeFont.render('High Score: ' +
                                          str(updateFile()), 1, (0, 0, 0))
-        window.blit(previousScore, (W / 2 - previousScore.get_width() /
+        window.blit(highScore, (W / 2 - highScore.get_width() /
                                     2, 200))
-        newScore = largeFont.render('Score: ' + str(score), 1, (0, 0, 0))
+        newScore = largeFont.render('Your Score: ' + str(score), 1, (0, 0, 0))
         window.blit(newScore, (W / 2 - newScore.get_width() / 2, 320))
         play = largeFont.render('Click the screen to Play Again!', 1,
                                 (0, 0, 0))
@@ -289,9 +280,20 @@ fallSpeed = 0
 objects = []
 # blank list for objects to be appended to
 
+W, H = 800, 600
+# width and height of the screen
+# background image is 800 by 600
+window = pygame.display.set_mode((W, H))
+pygame.display.set_caption('Side Scroller Game')
+# creates caption at the top of pygame window
+bg = pygame.image.load(os.path.join('./../images/', 'background.png')).convert()
+# background image which is in the images folder
+bgX = 0
+# used to keep track of x position of two different images
+bgX2 = bg.get_width()
+
 while run:
     # main loop for Game
-
     score = speed // 2 - 15
     if pause > 0:
         pause += 1
