@@ -117,6 +117,7 @@ class player(object):
         # draws a red rectangle around character while running, jumping,
         # and sliding
 
+
 class box(object):
     img = pygame.image.load(os.path.join('./../images/', 'Box.png'))
 
@@ -137,6 +138,7 @@ class box(object):
         self.count += 1
         # pygame.draw.rect(window, (255, 0, 0), self.hitbox, 2)
         # draws a red outline of the boxes hitbox
+
     def collide(self, rect):
         # rect takes hitbox of the player
         if (rect[0] + rect[2] > self.hitbox[0] and
