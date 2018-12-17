@@ -11,7 +11,7 @@ Currently, the program's code is checked by the .travis.yml file every time some
 The primary tools used to develop this project were Atom, Python3, and .travis.yml. Atom was the text editor where all of the coding was performed. The programming language used for the program's development was Python3. The .travis.yml file checks every push made to the project to ensure they follow the PEP8 style guide and standards.
 
 ## Tangible Results
-This project is still in development so there are very few tangible results. Currently, the player gains speed as the game runs. The player is also able to jump or slide past approaching objects. The score is also kept track of using the `scores.txt` file. There is currently an End Game screen between runs, but there is no menu to exit the game or perhaps change the difficulty.
+This project is still in development so there are few tangible results. Currently, the player gains speed as the game runs. The player is also able to jump or slide past approaching objects. The score is also kept track of using the `scores.txt` file. There is currently an End Game screen between runs, but there is no menu to exit the game or perhaps change the difficulty.
 
 Here is an example of the program in action:
 
