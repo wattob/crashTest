@@ -11,6 +11,7 @@ pygame.init()
 clock = pygame.time.Clock()
 # used to change the FPS as the player moves
 
+
 class bat(object):
     # class for bat object that inherits from object
     img = [pygame.image.load(os.path.join('./../images/', 'bat1.png')),
@@ -108,12 +109,12 @@ class player(object):
             pygame.image.load(os.path.join('./../images/', 'jump3.png')),
             pygame.image.load(os.path.join('./../images/', 'jump4.png'))]
     # loading in the images for run from the images folder
-    run =  [pygame.image.load(os.path.join('./../images/', 'run1.png')),
-            pygame.image.load(os.path.join('./../images/', 'run2.png')),
-            pygame.image.load(os.path.join('./../images/', 'run3.png')),
-            pygame.image.load(os.path.join('./../images/', 'run4.png')),
-            pygame.image.load(os.path.join('./../images/', 'run5.png')),
-            pygame.image.load(os.path.join('./../images/', 'run6.png'))]
+    run = [pygame.image.load(os.path.join('./../images/', 'run1.png')),
+           pygame.image.load(os.path.join('./../images/', 'run2.png')),
+           pygame.image.load(os.path.join('./../images/', 'run3.png')),
+           pygame.image.load(os.path.join('./../images/', 'run4.png')),
+           pygame.image.load(os.path.join('./../images/', 'run5.png')),
+           pygame.image.load(os.path.join('./../images/', 'run6.png'))]
     # loading in the images for slide from the images folder
     slide = [pygame.image.load(os.path.join('./../images/', 'slide1.png')),
              pygame.image.load(os.path.join('./../images/', 'slide2.png')),
@@ -168,8 +169,8 @@ class player(object):
         # initially set to false to show that the chracter is not currently
         # getting up from sliding
 
-
     # animation for character running, jumping, sliding, and injured
+    # source: https://github.com/techwithtim
     def draw(self, window):
         # speeds up animation while screen background speeds up
         if self.injured:
@@ -312,10 +313,9 @@ def endScreen():
         largeFont = pygame.font.SysFont('comicsans', 70)
         # large font to be used to show High Score and Current Score
         highScore = largeFont.render('High Score: ' +
-                                         str(updateScores()), 1, (0, 0, 0))
+                                     str(updateScores()), 1, (0, 0, 0))
         # prints High Score and the high score found in the file in black
-        window.blit(highScore, (W / 2 - highScore.get_width() /
-                                    2, 200))
+        window.blit(highScore, (W / 2 - highScore.get_width() / 2, 200))
         # adds high score to the center of the screen
         newScore = largeFont.render('Your Score: ' + str(score), 1, (0, 0, 0))
         # prints the score from the current run in black
@@ -353,7 +353,8 @@ W, H = 800, 600
 window = pygame.display.set_mode((W, H))
 pygame.display.set_caption('Side Scroller Game')
 # creates caption at the top of pygame window
-bg = pygame.image.load(os.path.join('./../images/', 'background.png')).convert()
+bg = pygame.image.load(os.path.join('./../images/',
+                       'background.png')).convert()
 # background image which is in the images folder
 bgX = 0
 # used to keep track of x position of two different images
