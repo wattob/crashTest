@@ -17,7 +17,7 @@ Here is an example of the program in action:
 
 ![Program in Action](images/example.png)
 
-## Source
+## Source for the Images Used
 Source for character: https://opengameart.org/content/running-and-jumping-kid-sprite-sheets
 
 Source for background: https://opengameart.org/content/3-parallax-backgrounds
