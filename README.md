@@ -15,7 +15,7 @@ This project is still in development so there are not many tangible results. Cur
 
 Here is an example of the program in action:
 
-![Program in Action](images/example.png)
+![Program in Action](images/example.PNG)
 
 ## Source for the Images Used
 Source for character: https://opengameart.org/content/running-and-jumping-kid-sprite-sheets
